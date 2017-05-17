@@ -58,7 +58,7 @@ angular.module('steempoll.new', ['ngRoute'])
         $scope.result = res.data;
         if (res.status === 200){
           console.log('success '+res.data._id);
-          var poll_body = "<div steempoll='"+res.data._id+"'></div><br><h1>"+$scope.data.title+"</h1><p>"+$scope.data.description+"</p><br>";
+          var poll_body = "<div steempoll='"+res.data._id+"'></div><h1>"+$scope.data.title+"</h1><p>"+$scope.data.description+"</p><br>";
           $scope.embedding = poll_body;
 
           $scope.data = {};

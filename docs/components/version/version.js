@@ -7,7 +7,7 @@ angular.module('steempoll.version', [
 
 .value('version', '1.0')
 
-.constant('API_END_POINT','api.esteem.ws:8080')
+.constant('API_END_POINT','http://api.esteem.ws:8080')
 
 .service('APIs', ['$http', '$rootScope', 'API_END_POINT', function ($http, $rootScope, API_END_POINT) {
   'use strict';

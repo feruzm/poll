@@ -15,6 +15,9 @@ angular.module('steempoll.version', [
     addPoll: function(poll) {
       return $http.post(API_END_POINT+"/api/polls", {title: poll.title, description: poll.description, choices: poll.choices, preferences: poll.preferences, email: poll.email});
     },
+    addNewPoll: function(poll) {
+      return $http.post(API_END_POINT+"/api/polls", {title: poll.title, description: poll.description, choices: poll.choices, preferences: poll.types});
+    },
     getPoll: function(id) {
       return $http.get(API_END_POINT+"/api/poll/"+id);
     }

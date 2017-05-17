@@ -24,6 +24,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+  <script src="http://code.highcharts.com/stock/highstock.src.js"></script>
+
+
 </head>
 <body>
   <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top" style="background-color: #00396B;">
@@ -38,7 +41,7 @@
           <a class="nav-link" href="#!/polls">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#!/new">Create Poll</a>
+          <a class="nav-link" href="#!/new">New</a>
         </li>
       </ul>
       <!--<form class="form-inline my-2 my-lg-0">
@@ -51,19 +54,20 @@
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+  
+  <div ng-view>
+    
 
-  <div ng-view></div>
+  </div>
 
   <div class="footer">SteemPoll is brought to you by <a href="http://esteem.ws" target="_blank">eSteem</a> ∙ <a href="https://steemit.com/@good-karma">@good-karma</a></div>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-route.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
 
 
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-chart/0.1.0/ng-google-chart.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-sanitize.min.js"></script>
 
   <!--<script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-route/angular-route.js"></script>
@@ -75,6 +79,7 @@
   <script src="new/new.js"></script>
   <script src="poll/poll.js"></script>
   <script src="components/steem.min.js"></script>
+  <script src="components/highcharts-ng.js"></script>
   <script src="components/version/version.js"></script>
   <script src="components/version/version-directive.js"></script>
   <script src="components/version/interpolate-filter.js"></script>

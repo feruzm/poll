@@ -1,9 +1,10 @@
 <div class="poll">
   <div class="card">
-    <img class="card-img-top" ng-src="img/poll.png" style="width:50%;" alt="Card image cap">
+    <!--<img class="card-img-top" ng-src="img/poll.png" style="width:50%;" alt="Card image cap">-->
     <div class="card-block">
-      <h4 class="card-title"> {{post.title}} </h4>
+      <!--<h4 class="card-title"> {{post.title}} </h4>-->
       <p ng-if="user.annon&&post">THIS POST IS NOT A POLL BUT ANNOUNCEMENT<br>Visit: <a href="https://steemit.com/{{category}}/@{{author}}/{{permlink}}">Link</a></p>
+      <span ng-if="poll">#{{ptypes[poll.preferences].name}}</span>
       <p class="card-text" ng-bind-html="post.body"></p>
       <div ng-if="poll" ng-repeat="p in poll.choices">
         <label>
@@ -29,7 +30,9 @@
         </div>
         <a ng-click="confirmVote()" class="btn btn-success">Confirm</a>
       </div>
-      <div google-chart chart="barObject" style="height:600px;width:100%;" ng-if="post&&results"></div>
+      <!--<div google-chart chart="barObject" style="height:600px;width:100%;" ></div>-->
+      <highchart id="chart1" config="barObject" ng-if="post&&results"></highchart>
+
     </div>
     <div class="card-footer">
       <small class="text-muted">Created {{post.last_update|date:'MM/dd/yyyy @ h:mma'}} </small>

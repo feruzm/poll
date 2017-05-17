@@ -4,11 +4,11 @@
 angular.module('steempoll', [
   'ngRoute',
   'ngSanitize',
-  'googlechart',
   'steempoll.polls',
   'steempoll.new',
   'steempoll.poll',
-  'steempoll.version'
+  'steempoll.version',
+  'highcharts-ng'
 ]).
 config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
   $locationProvider.hashPrefix('!');

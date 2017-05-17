@@ -1,6 +1,26 @@
 <div class="lists">
+  <p>
+    <a href class="btn btn-secondary" ng-click="changeFilter('steempoll')" ng-class="{'active':filter=='steempoll'}">#steempoll</a>
+    <a href class="btn btn-secondary" ng-click="changeFilter('growth-ideas')" ng-class="{'active':filter=='growth-ideas'}">#growth-ideas</a>
+    <a href class="btn btn-secondary" ng-click="changeFilter('growth-proposals')" ng-class="{'active':filter=='growth-proposals'}">#growth-proposals</a>
+    <a href class="btn btn-secondary" ng-click="changeFilter('growth-projects')" ng-class="{'active':filter=='growth-projects'}">#growth-projects</a>
+  </p>
   <div ng-repeat="item in list">
-    <div class="card-deck" ng-if="$index % 3 == 0">
+
+    <div class="row myitem">
+      <div class="col-sm-2">
+        <span class="" ng-if="isValid(item)" ng-class="{'side-corner-tag':isValid(item)}"></span>
+        <img class="" ng-src="{{item.json_metadata.image[0]}}" src="img/poll.png" style="width:100%;" alt="image">
+        <!--<p ng-if="isValid(item)"><span>vote</span></p>-->
+      </div>
+      <div class="col-sm-10">
+        <h5>{{item.title}}</h5>
+        <p>by <b>{{item.author}}</b></p>
+        <p><a href="#!poll/{{item.category}}/{{item.author}}/{{item.permlink}}" class="bottom">More</a></p>
+      </div>
+    </div>
+
+    <!--<div class="card-deck rows" ng-if="$index % 3 == 0">
       <div class="card" ng-if="list[$index]">
         <img class="card-img-top" ng-src="img/poll.png" style="width:100%;" alt="Card image cap">
         <div class="card-block">
@@ -43,6 +63,6 @@
           <small class="text-muted">Created {{list[$index+2].last_update|date:'MM/dd/yyyy @ h:mma'}} </small>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </div>

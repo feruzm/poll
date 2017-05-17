@@ -27,7 +27,7 @@ angular.module('steempoll.polls', ['ngRoute'])
           //console.log(v);
           v.json_metadata = v.json_metadata?angular.fromJson(v.json_metadata):v.json_metadata;
         });
-        console.log(response)
+        //console.log(response)
         $scope.list = response;
         if (!$scope.$$phase){
           $scope.$apply();

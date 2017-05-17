@@ -76,7 +76,6 @@ body {
   bottom: 0;
 }
 
-
 .side-corner-tag{
   position: absolute;
   top: 0;
@@ -85,7 +84,7 @@ body {
   color: #eee;
   font-size: 1em;
   cursor: pointer;
-  width: 0.75em;
+  width: 0.5em;
   line-height: 0.5em;
   -webkit-transition: line-height 0.5s;
   transition: line-height 0.5s;
@@ -94,7 +93,7 @@ body {
   content: "";
   font-size: 0.5em;
   position: absolute;
-  height: 1.2em;
+  height: 0.6em;
   border: 1.5em solid #F44336;
   z-index: -1;
   top: -1em;
@@ -118,12 +117,12 @@ body {
 .side-corner-tag:hover:after{
   border: 1.5em solid #EF5350;
   border-bottom-color: transparent;
-  height: 1.6em;
+  height: 0.8em;
   -webkit-transition: height 0.5s;
   transition: height 0.5s;
 }
 .side-corner-tag:hover{
-  line-height: 0.9em;
+  line-height: 0.45em;
   color: #333;
   -webkit-transition: line-height 0.5s;
   transition: line-height 0.5s;

@@ -10,13 +10,17 @@ angular.module('steempoll.poll', ['ngRoute'])
 }])
 
 .controller('PollCtrl', function($scope, $routeParams, APIs, $filter) {
+  
   $scope.ptypes = [{id: 0, name: "-"}, {id: 1, name: "poll"}, {id: 2, name: "idea"}, {id: 3, name: "proposal"}, {id: 4, name: "project"}];
+
   var stripData = function(tt){
     //console.log(tt.body);
 
     var text = tt.body;
     if (text.indexOf("<div steempoll='")>-1) {
       return text.slice(text.indexOf("<div steempoll='"), text.indexOf("</p><br>")+8);
+    } else {
+      return "THIS POST DOES NOT HAVE AN EMBEDDED POLL!"
     }
   }
   $scope.castingVote = false;
@@ -32,7 +36,6 @@ angular.module('steempoll.poll', ['ngRoute'])
     }
   }
   $scope.confirmVote = function(){
-    var perc = $scope.user.percent*100;
     var wif = steem.auth.isWif($scope.user.wif) ? $scope.user.wif : steem.auth.toWif($scope.user.voter, $scope.user.wif, 'posting');
 
     steem.broadcast.vote(wif, $scope.user.voter, "steempoll", $scope.totalData[$scope.user.percent].permlink, 10000, function(err, result) {
@@ -140,6 +143,15 @@ angular.module('steempoll.poll', ['ngRoute'])
       //}, 10);
     }
   }
+
+  $scope.openDiscussion = function(poll) {
+    var perm = $scope.totalData[poll.id.substring(6)-1].permlink;
+    steem.api.getState("tag/@steempoll/"+perm, function(err, res) {
+      console.log("+",res);
+    });
+  }
+
+
   $scope.author = $routeParams.author;
   $scope.category = $routeParams.category;
   $scope.permlink = $routeParams.permlink;
@@ -151,7 +163,7 @@ angular.module('steempoll.poll', ['ngRoute'])
         alert('Error fetching post, please reload the page!');
       }
       if (result) {
-        console.log(result)
+        //console.log(result)
         result.json_metadata = angular.fromJson(result.json_metadata||{})||{};        
 
         if (result.body.indexOf("steempoll='")>-1) {
@@ -161,6 +173,7 @@ angular.module('steempoll.poll', ['ngRoute'])
           $scope.post = result;
           
           var id = result.body.slice(result.body.indexOf("steempoll='")+11, result.body.indexOf("'></div>"));
+          console.log(id);
             APIs.getPoll(id).then(function(res){
               $scope.poll = res.data;
               console.log(res.data);
@@ -177,7 +190,9 @@ angular.module('steempoll.poll', ['ngRoute'])
                       if(v.body.toLowerCase().match(inputString.toLowerCase())!==null){
                         $scope.totalData[i] = v;
                       }
-                      
+                      if (!$scope.$$phase){
+                        $scope.$apply();
+                      }
                     }
                   }
                 });
@@ -185,6 +200,8 @@ angular.module('steempoll.poll', ['ngRoute'])
             });
         } else {
           $scope.user.annon = true;
+          result.body = stripData(result);
+          $scope.post = result;
         }
       }
       if (!$scope.$$phase){

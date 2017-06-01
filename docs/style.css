@@ -133,3 +133,98 @@ highchart {
   width: 100%;
   max-width: 100%;
 }
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+.fancymodal-content {
+  width: 90%!important;
+}
+
+/***************************************/
+/*Comments                             */
+/***************************************/
+
+.card ol, ul {
+  list-style: none; 
+}
+
+.card {
+  background-color: #eee;
+}
+
+.ion-comment {
+  font-size: 15px;
+  padding: 4px 0px;
+  overflow: visible;
+  white-space: normal;
+  border: none;
+  width: 100%;
+}
+.ion-comment .item-options .button {
+  background-color: #e0e0e0;
+}
+.ion-comment--text p {
+  overflow: visible;
+  white-space: normal;
+}
+.ion-comment .item-content,
+.ion-comment .item-content p {
+  padding: 0;
+  overflow: visible;
+  white-space: normal;
+  font-size: 14px;
+  color: #111;
+}
+.ion-comment--author {
+  color: #111;
+}
+.ion-comment--author img {
+  float: left;
+  overflow: hidden;
+}
+img.round-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin: 0px 10px 0px 0px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+
+.ion-comment--op {
+  color: #8899a6;
+}
+.ion-comment--replies {
+  color: #8899a6;
+  padding: 10px 0px;
+}
+.ion-comment--replies .tb {
+  text-align: right;
+}
+.ion-comment--replies .ti {
+  text-align: left;
+}
+.ion-comment--score {
+  text-align: right;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: #8899a6;
+}
+.reputation {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 18px;
+  padding: 0 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+  background-color: #f8f8f8;
+  border-radius: 50%;
+  border: 1px solid #dadada;
+  color: #000!important;
+}
+
+

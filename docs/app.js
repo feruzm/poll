@@ -8,7 +8,8 @@ angular.module('steempoll', [
   'steempoll.new',
   'steempoll.poll',
   'steempoll.version',
-  'highcharts-ng'
+  'highcharts-ng',
+  'vesparny.fancyModal'
 ]).
 config(['$locationProvider', '$routeProvider','$httpProvider', function($locationProvider, $routeProvider,$httpProvider) {
   $locationProvider.hashPrefix('!');

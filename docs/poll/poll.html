@@ -10,7 +10,7 @@
         <label>
           <input type="radio" ng-model="user.choice" value="{{p.id}}">
           {{p.name}}
-        </label><a class="pull-right" href ng-click="openDiscussion(p)"><i class="fa fa-comment"> {{totalData[p.id.substring(6)-1].children}}</i></a><br/>
+        </label><a class="pull-right" href ng-click="openDiscussion(p)" data-toggle="modal" data-target="#exampleModal"><i class="fa fa-comment"> {{totalData[p.id.substring(6)-1].children}}</i></a><br/>
       </div>
 
       <div class="btn-group" ng-if="poll" role="group" aria-label="Toolbar">
@@ -39,4 +39,47 @@
     </div>
   </div>
 
+
+  <!-- Modal -->
+  <script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">Discussions</h3>
+    </div>
+    <div class="modal-body">
+
+      <ion-thread comments="$root.comments"></ion-thread>
+      
+      <!--<div class="card" ng-repeat="comment in $root.comments">
+        <div class="card-header">
+          @{{comment.author}} 
+        </div>
+        <div class="card-block">
+          <p class="card-text"><span ng-bind-html="comment.body"></span></p>
+          <div class="card" ng-repeat="comment1 in comment.comments" ng-if="comment.comments">
+            <div class="card-header">
+              @{{comment1.author}} 
+            </div>
+            <div class="card-block">
+              <p class="card-text"><span ng-bind-html="comment1.body"></span></p>
+              <div class="card" ng-repeat="comment2 in comment1.comments" ng-if="comment1.comments">
+                <div class="card-header">
+                  @{{comment2.author}} 
+                </div>
+                <div class="card-block">
+                  <p class="card-text"><span ng-bind-html="comment2.body"></span></p>
+                </div>
+              </div>   
+            </div>
+          </div>          
+        </div>
+      </div>
+-->
+    </div>
+    <div class="modal-footer">
+        <!--<button class="btn btn-primary" type="button" ng-click="ok()">OK</button>-->
+        <button class="btn btn-primary" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+       
+  </script>
 </div>
+

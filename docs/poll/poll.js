@@ -9,7 +9,7 @@ angular.module('steempoll.poll', ['ngRoute'])
   });
 }])
 
-.controller('PollCtrl', function($scope, $routeParams, APIs, $filter) {
+.controller('PollCtrl', function($scope, $routeParams, APIs, $filter, $log, $rootScope, $fancyModal) {
   
   $scope.ptypes = [{id: 0, name: "-"}, {id: 1, name: "poll"}, {id: 2, name: "idea"}, {id: 3, name: "proposal"}, {id: 4, name: "project"}];
 
@@ -144,14 +144,66 @@ angular.module('steempoll.poll', ['ngRoute'])
     }
   }
 
-  $scope.openDiscussion = function(poll) {
+
+
+  $scope.openDiscussion = function(poll, size, parentSelector) {
+    
+    //console.log(poll);
     var perm = $scope.totalData[poll.id.substring(6)-1].permlink;
+    //console.log($scope.totalData[poll.id.substring(6)-1]);
+    var pollOp = $scope.totalData[poll.id.substring(6)-1];
+
     steem.api.getState("tag/@steempoll/"+perm, function(err, res) {
-      console.log("+",res);
+      //console.log("+",res);
+      $rootScope.comments = [];
+      angular.forEach(res.content, function(v,k){
+        v.comments = [];
+      });
+      angular.forEach(res.content, function(v,k){
+        //v.comments = [];
+        if (v.parent_author === pollOp.author && v.parent_permlink == pollOp.permlink) {
+          $rootScope.comments.push(v);
+        } /*else {
+          console.log(res.content[v.parent_author+"/"+v.parent_permlink]);
+          v.comments.push(res.content[v.parent_author+"/"+v.parent_permlink]);  
+        }*/
+        if (!$scope.$$phase) {
+          $scope.$apply();
+        }  
+      });
+      $rootScope.accounts = res.accounts;
+
+      angular.forEach(res.accounts, function(v,k){
+        
+        if (typeof v.json_metadata === 'string' || v.json_metadata instanceof String) {
+          if (v.json_metadata) {
+            v.json_metadata = v.json_metadata?angular.fromJson(v.json_metadata):{};
+            var key = v.name;
+            if (!v.json_metadata.profile.profile_image) {
+              v.json_metadata = {profile: {profile_image: "https://robohash.org/"+v.name+".png?size=48x48"}};
+            }
+            $rootScope.accounts[key].json_metadata = v.json_metadata;
+          } else {
+            $rootScope.accounts[key].json_metadata = {profile: {profile_image: "https://robohash.org/"+v.name+".png?size=48x48"}};
+          }
+        }
+      });
+      console.log($rootScope.accounts);
+
+      $fancyModal.open({ 
+        templateUrl: 'myModalContent.html',
+        controller: 'PollCtrl'
+      });
+      
+      //console.log($rootScope.comments)
     });
+    
+    
   }
 
-
+  $scope.cancel = function(){
+    $fancyModal.close();
+  }
   $scope.author = $routeParams.author;
   $scope.category = $routeParams.category;
   $scope.permlink = $routeParams.permlink;
@@ -173,10 +225,10 @@ angular.module('steempoll.poll', ['ngRoute'])
           $scope.post = result;
           
           var id = result.body.slice(result.body.indexOf("steempoll='")+11, result.body.indexOf("'></div>"));
-          console.log(id);
+          //console.log(id);
             APIs.getPoll(id).then(function(res){
               $scope.poll = res.data;
-              console.log(res.data);
+              //console.log(res.data);
 
               steem.api.getState("tag/"+"@"+$routeParams.author+"/"+$routeParams.permlink, function(err, result) {
                 angular.forEach(result.content, function(v,k){

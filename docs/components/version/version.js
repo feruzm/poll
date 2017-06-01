@@ -24,6 +24,7 @@ angular.module('steempoll.version', [
   };
 }])
 
+
 .filter('timeago', function($filter, $rootScope) {
 
   function TimeAgo(input, p_allowFuture) {
@@ -33,7 +34,7 @@ angular.module('steempoll.version', [
             return string.replace(/%d/i, value);
         }
         var nowTime = (new Date()).getTime();
-        var date = (new Date(input)).getTime();
+        var date = (new Date(input+'.000Z')).getTime();
         //refreshMillis= 6e4, //A minute
 
         // get difference between UTC and local time in milliseconds
@@ -260,6 +261,17 @@ function ionThread() {
 
     }
   }
+}
+
+function convertUTCDateToLocalDate(date) {
+    var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+    var offset = date.getTimezoneOffset() / 60;
+    var hours = date.getHours();
+
+    newDate.setHours(hours - offset);
+
+    return newDate;   
 }
 
 ;

@@ -188,7 +188,7 @@ angular.module('steempoll.poll', ['ngRoute'])
           }
         }
       });
-      console.log($rootScope.accounts);
+      //console.log($rootScope.accounts);
 
       $fancyModal.open({ 
         templateUrl: 'myModalContent.html',
